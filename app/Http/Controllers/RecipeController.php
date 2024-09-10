@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Recipe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RecipeController extends Controller
 {
@@ -18,11 +19,14 @@ class RecipeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $recipe = Recipe::create($request->all());
+    public function store(Request $request) {
+        $data = $request->all();
+        $data['user_id'] = Auth::id();  // Use the authenticated user's ID
+
+        $recipe = Recipe::create($data);
         return response()->json($recipe, 201);
     }
+
 
     /**
      * Display the specified resource.

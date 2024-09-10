@@ -1,12 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
 import RecipeList from './components/RecipeList/RecipeList';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
 
 function App() {
   return (
     <div className="App">
 
         <RecipeList />
+        {/* <Login /> */}
+        {/* <Register /> */}
 
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
