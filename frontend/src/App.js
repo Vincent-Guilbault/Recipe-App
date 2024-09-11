@@ -4,12 +4,14 @@ import RecipeList from './components/RecipeList/RecipeList';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Navbar from './components/Navbar/Navbar';
+import CategoryList from './components/CategoryList/CategoryList';
 
 function App() {
   return (
     <div className="App">
 
         <Navbar />
+        <CategoryList />
         <RecipeList />
         <Login />
         {/* <Register /> */}
