@@ -11,10 +11,12 @@ class RecipeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return response()->json(Recipe::all());
+    public function index() {
+        // Get only the recipes that belong to the authenticated user
+        $recipes = Recipe::where('user_id', Auth::id())->get();
+        return response()->json($recipes);
     }
+
 
     /**
      * Store a newly created resource in storage.
