@@ -79,20 +79,20 @@ function Profile({ user, setUser }) {  // Use props from App.js
                     <div>
                         <label htmlFor="password">New Password:</label>
                         <input
-                            type="text"
+                            type="password"
                             id="password"
                             name="password"
-                            value={user.password}
+                            value={user.password || ''}  // Default to empty string if password is undefined
                             onChange={(e) => setUser({ ...user, password: e.target.value })}
                         />
 
                         {/* Input to confirm the user's new password */}
                         <label htmlFor="password_confirmation">Confirm New Password:</label>
                         <input
-                            type="text"
+                            type="password"
                             id="password_confirmation"
                             name="password_confirmation"
-                            value={user.password_confirmation}
+                            value={user.password_confirmation || ''}  // Default to empty string if password_confirmation is undefined
                             onChange={(e) => setUser({ ...user, password_confirmation: e.target.value })}
                         />
 
@@ -101,7 +101,16 @@ function Profile({ user, setUser }) {  // Use props from App.js
                             onClick={() => {
                                 axios.put('/api/user', user, { withCredentials: true })
                                     .then(response => {
-                                        setUser(response.data);
+                                        if (user.password) {
+                                            // If password was changed, log the user out
+                                            setUser(null);  // Clear the user state to trigger re-render
+
+                                            // Force a page reload to reset any stale sessions or cookies
+                                            window.location.reload();
+                                        } else {
+                                            // If no password change, just update the user data
+                                            setUser(response.data);
+                                        }
                                     })
                                     .catch(error => {
                                         console.error('Update failed', error);

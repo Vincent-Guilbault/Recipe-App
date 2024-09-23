@@ -34,6 +34,7 @@ function Register({ setUser }) {
                 .then(response => {
                     setUser(response.data);  // Set user state after login
                     console.log('Registration and login successful!', response.data);
+                    window.location.reload(); // Refresh the page
                 })
                 .catch(loginError => {
                     setError('Login failed after registration');
