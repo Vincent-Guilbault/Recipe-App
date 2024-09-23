@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\UserController;
 
 // Public routes for registration and login
 Route::post('/register', [RegisteredUserController::class, 'store']);
@@ -30,5 +31,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+    // Route for updating user profile
+    Route::put('/user', [UserController::class, 'update']);
 });
 

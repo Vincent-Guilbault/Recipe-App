@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function Register() {
+function Register({ setUser }) {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -23,10 +23,22 @@ function Register() {
     // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
+
         axios.post('/api/register', formData)
-            .then(response => {
-                console.log('Registration successful!', response.data);
-                // You can redirect the user to the login page or set a logged-in state
+            .then(() => {
+                // After successful registration, automatically log the user in
+                axios.post('/api/login', {
+                    email: formData.email,
+                    password: formData.password,
+                }, { withCredentials: true })
+                .then(response => {
+                    setUser(response.data);  // Set user state after login
+                    console.log('Registration and login successful!', response.data);
+                })
+                .catch(loginError => {
+                    setError('Login failed after registration');
+                    console.error('Login error:', loginError);
+                });
             })
             .catch(error => {
                 setError('There was an error with the registration.');
