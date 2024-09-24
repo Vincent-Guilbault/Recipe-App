@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import './login.css';
 
 function Login({ setUser }) {
     const [email, setEmail] = useState('');
