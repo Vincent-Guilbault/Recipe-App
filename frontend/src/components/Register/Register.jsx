@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './register.css';
 
-function Register({ setUser }) {
+function Register({ setUser, setShowLogin }) {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -49,7 +50,7 @@ function Register({ setUser }) {
 
     return (
         <div>
-            <h2>Register</h2>
+            {/* <h2>Register</h2> */}
             {error && <p>{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div>
@@ -92,8 +93,13 @@ function Register({ setUser }) {
                         required
                     />
                 </div>
-                <button type="submit">Register</button>
+                <button className="register-btn" type="submit">Register</button>
             </form>
+            <div className="login-link">
+                <p>Already have an account?</p>
+                {/* setShowLogin to switch back to Login */}
+                <span onClick={() => setShowLogin(true)} className="swap-link">Sign In</span>
+            </div>
         </div>
     );
 }

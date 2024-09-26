@@ -41,26 +41,26 @@ button {
     transition: background-color 0.3s ease;
 }
 
-.sign-in-btn {
+.auth-sign-in-btn {
     background: transparent;
     color: white;
     font-weight: 700;
     border: 2px solid white;
 }
 
-.sign-in-btn:hover {
+.auth-sign-in-btn:hover {
     background-color: #ffffff;
     font-weight: 700;
     color: #23003C;
 }
 
-.sign-up-btn {
+.auth-sign-up-btn {
     background-color: #ffffff;
     font-weight: 700;
     color: #23003C;
 }
 
-.sign-up-btn:hover {
+.auth-sign-up-btn:hover {
     background: transparent;
     color: white;
     border: 2px solid white;

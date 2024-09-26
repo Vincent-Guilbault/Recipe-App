@@ -22,15 +22,15 @@ function AuthContainer({ setUser }) {
             <h1 className="app-title">RecipePlanner</h1>
             <p className="welcome-message">Welcome Back</p>
             <div className="auth-buttons">
-                <button className="sign-in-btn" onClick={handleSignIn}>Sign In</button>
-                <button className="sign-up-btn" onClick={handleSignUp}>Sign Up</button>
+                <button className="auth-sign-in-btn" onClick={handleSignIn}>Sign In</button>
+                <button className="auth-sign-up-btn" onClick={handleSignUp}>Sign Up</button>
             </div>
 
             <div className={`auth-form-container ${showForm ? 'show' : ''}`}>
                 {showLogin ? (
-                    <Login setUser={setUser} />
+                    <Login setUser={setUser} setShowLogin={setShowLogin} />
                 ) : (
-                    <Register setUser={setUser} />
+                    <Register setUser={setUser} setShowLogin={setShowLogin} />
                 )}
             </div>
         </div>

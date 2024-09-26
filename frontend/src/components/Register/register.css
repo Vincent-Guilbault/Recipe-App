@@ -39,7 +39,7 @@ input:focus {
     outline: none;
 }
 
-.login-btn {
+.register-btn {
     width: 100%;
     background: linear-gradient(90deg, #570000 0%, #23003C 100%);
     margin-top: 20px;
@@ -53,19 +53,19 @@ input:focus {
     font-family: Poppins, sans-serif;
 }
 
-.register-link {
-    margin-top: 200px;
+.login-link {
+    margin-top: 30px;
     padding-right: 20px;
     text-align: right;
 }
 
-.register-link p {
+.login-link p {
     font-size: 14px;
     color: #333;
     display: block;
 }
 
-.register-link a {
+.login-link a {
     color: linear-gradient(90deg, #570000 0%, #23003C 100%);
     font-weight: 600;
     text-decoration: none;
@@ -81,6 +81,7 @@ input:focus {
 .swap-link:hover {
     color: #23003C;
 }
+
 
 
 @media (min-width: 768px) {
