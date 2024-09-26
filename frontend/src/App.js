@@ -2,7 +2,6 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import RecipeList from './components/RecipeList/RecipeList';
 import Navbar from './containers/Navbar/Navbar';
-import CategoryList from './components/CategoryList/CategoryList';
 import Profile from './containers/Profile/Profile';
 import AuthContainer from './containers/AuthContainer/AuthContainer';
 import axios from 'axios';

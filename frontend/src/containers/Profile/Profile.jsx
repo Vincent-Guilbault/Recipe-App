@@ -15,7 +15,7 @@ function Profile({ user, setUser }) {  // Use props from App.js
     };
 
     return (
-        <div>
+        <div className="profile-container">
             <h1>Your Profile</h1>
 
             {/* If the user is authenticated, show their name and a logout button */}
@@ -121,7 +121,7 @@ function Profile({ user, setUser }) {  // Use props from App.js
                         </button>
                     </div>
 
-                    <button onClick={handleLogout}>Logout</button>
+                    <button className='logout-btn' onClick={handleLogout}>Logout</button>
                 </div>
             ) : (
                 // Show the login button if the user is not authenticated

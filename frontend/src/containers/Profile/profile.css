@@ -1,1 +1,24 @@
+.profile-container {
+    padding: 20px;
+    background: #E9EFEC;
+}
 
+.profile-container label {
+    margin-top: 20px;
+}
+
+.profile-container button {
+    background: #6A9C89;
+    color: white;
+    font-weight: 700;
+    font-family: Poppins, sans-serif;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.profile-container .logout-btn {
+    margin-top: 50px;
+    background: #16423C;
+}
