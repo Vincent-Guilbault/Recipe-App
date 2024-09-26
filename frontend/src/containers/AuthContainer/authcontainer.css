@@ -11,6 +11,30 @@
     overflow: hidden; /* Prevent scrolling to the hidden form */
 }
 
+/* Form Header */
+.auth-form-header {
+    position: relative;
+    bottom: 175px;
+    font-size: 48px;
+    margin-left: 20px;
+    margin-bottom: -100px;
+    color: #fff;
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Smooth slide and fade-in */
+    transform: translateX(-100%); /* Start off-screen to the left */
+    opacity: 0; /* Start transparent */
+}
+
+.auth-form-header.show {
+    transform: translateX(0); /* Move to original position */
+    opacity: 1; /* Fade in */
+}
+
+.auth-form-header h2 {
+    font-size: 36px;
+    text-align: left;
+    white-space: pre-line; /* Allows line breaks in the header text */
+}
+
 .app-title {
     font-size: 32px;
     font-weight: 700;

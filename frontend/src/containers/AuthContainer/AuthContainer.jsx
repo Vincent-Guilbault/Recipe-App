@@ -19,6 +19,12 @@ function AuthContainer({ setUser }) {
 
     return (
         <div className="auth-container">
+
+            {/* Header for Login/Register with transition */}
+            <div className={`auth-form-header ${showForm ? 'show' : ''}`}>
+                <h2>{showLogin ? 'Hello \n Sign In' : 'Create Your Account'}</h2>
+            </div>
+
             <h1 className="app-title">RecipePlanner</h1>
             <p className="welcome-message">Welcome Back</p>
             <div className="auth-buttons">
@@ -28,8 +34,10 @@ function AuthContainer({ setUser }) {
 
             <div className={`auth-form-container ${showForm ? 'show' : ''}`}>
                 {showLogin ? (
+                    // Render the login form if showLogin is true
                     <Login setUser={setUser} setShowLogin={setShowLogin} />
                 ) : (
+                    // Render the register form if showLogin is false
                     <Register setUser={setUser} setShowLogin={setShowLogin} />
                 )}
             </div>
