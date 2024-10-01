@@ -24,7 +24,11 @@ function RecipeList() {
         // Fetch categories when component mounts
         axios.get('/api/categories')
             .then(response => {
-                setCategories(response.data);
+                if (Array.isArray(response.data)) {
+                    setCategories(response.data);
+                } else {
+                    setCategories([]);  // Set to an empty array if response is not an array
+                }
             })
             .catch(error => {
                 console.error('Error fetching categories', error);
@@ -93,14 +97,23 @@ function RecipeList() {
                 </div>
                 <div>
                     <label>Category:</label>
-                    <select name="category_id" value={newRecipe.category_id} onChange={handleInputChange}>
-                        <option value="">Select Category</option>
-                        {categories.map(category => (
-                            <option key={category.id} value={category.id}>{category.name}</option>
-                        ))}
+                    <select name="category_id" value={newRecipe.category_id} onChange={handleInputChange} disabled={categories.length === 0}>
+                        {categories.length > 0 ? (
+                            <>
+                                <option value="">Select Category</option>
+                                {categories.map(category => (
+                                    <option key={category.id} value={category.id}>{category.name}</option>
+                                ))}
+                            </>
+                        ) : (
+                            <option value="">No categories available</option>
+                        )}
                     </select>
+                    {categories.length === 0 && (
+                        <p>No categories available. Please create your first category to start adding recipes!</p>
+                    )}
                 </div>
-                <button type="submit">Add Recipe</button>
+                <button type="submit" disabled={categories.length === 0}>Add Recipe</button>
             </form>
         </div>
     );

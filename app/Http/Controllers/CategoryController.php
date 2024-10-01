@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -12,24 +13,28 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return response()->json(Category::all());
+        $user = Auth::user();
+        return response()->json($user->categories);
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
-        // Validate the request
+
         $request->validate([
             'name' => 'required|string|max:255',
         ]);
 
-        // Create and save the new category
-        $category = Category::create([
-            'name' => $request->name,
+        $user = Auth::user();
+
+        $category = new Category([
+            'name' => $request->input('name'),
+            'user_id' => $user->id,
         ]);
 
-        // Return the newly created category as a JSON response
+        $category->save();
+
         return response()->json($category, 201);
     }
 

@@ -8,7 +8,7 @@ function CategoryList() {
     });
 
     useEffect(() => {
-        // Fetch categories when component mounts
+        // Fetch categories for the authenticated user when component mounts
         axios.get('/api/categories')
             .then(response => {
                 setCategories(response.data);
@@ -44,7 +44,7 @@ function CategoryList() {
             <h1>Category List</h1>
             <ul>
                 {categories.map(category => (
-                    <li key={category.id + Math.random()}>{category.name}</li>
+                    <li key={category.id}>{category.name}</li>
                 ))}
             </ul>
             <h2>Add Category</h2>
@@ -64,4 +64,4 @@ function CategoryList() {
     );
 }
 
-export default CategoryList
+export default CategoryList;
