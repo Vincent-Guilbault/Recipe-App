@@ -4,6 +4,7 @@ import CategoryList from './components/CategoryList/CategoryList';
 import Navbar from './containers/Navbar/Navbar';
 import Profile from './containers/Profile/Profile';
 import AuthContainer from './containers/AuthContainer/AuthContainer';
+import MenuContainer from './containers/MenuContainer/MenuContainer';
 import axios from 'axios';
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
             case 'recipes':
                 return <CategoryList />;
             case 'menus':
-                return <h2>Menu of the Week</h2>;  // Placeholder for now
+                return <MenuContainer user={user} />;
             case 'profile':
                 return <Profile user={user} setUser={setUser} />;
             default:

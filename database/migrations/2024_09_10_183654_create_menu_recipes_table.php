@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('weekly_menu_id')->constrained()->onDelete('cascade');
             $table->foreignId('recipe_id')->constrained()->onDelete('cascade');
-            $table->date('day');
+            $table->string('day_name');
             $table->timestamps();
             $table->softDeletes();
         });

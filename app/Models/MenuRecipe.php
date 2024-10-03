@@ -13,7 +13,7 @@ class MenuRecipe extends Model
     protected $fillable = [
         'menu_id',
         'recipe_id',
-        'day',
+        'day_name',
     ];
 
     public function recipe()

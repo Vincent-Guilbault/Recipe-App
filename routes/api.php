@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WeeklyMenuController;
 
 // Public routes for registration and login
 Route::post('/register', [RegisteredUserController::class, 'store']);
@@ -26,6 +27,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/categories/{id}', [CategoryController::class, 'show']);  // Get a specific category
     Route::put('/categories/{id}', [CategoryController::class, 'update']); // Update a category
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy']); // Delete a category
+
+    // Route to get the user's weekly menu
+    Route::get('/weekly-menu', [WeeklyMenuController::class, 'index']); // Get the weekly menu
+
+    // Route to generate a new weekly menu
+    Route::post('/generate-weekly-menu', [WeeklyMenuController::class, 'generate']); // Generate weekly menu
 
     // Get the authenticated user
     Route::get('/user', function (Request $request) {
