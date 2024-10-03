@@ -13,9 +13,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        return response()->json($user->categories);
+        // Get all categories along with their related recipes
+        $categories = Category::with('recipes')->where('user_id', Auth::id())->get();
+        return response()->json($categories);
     }
+
 
     /**
      * Store a newly created resource in storage.

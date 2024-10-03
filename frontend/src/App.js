@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import RecipeList from './components/RecipeList/RecipeList';
+import CategoryList from './components/CategoryList/CategoryList';
 import Navbar from './containers/Navbar/Navbar';
 import Profile from './containers/Profile/Profile';
 import AuthContainer from './containers/AuthContainer/AuthContainer';
@@ -24,13 +24,13 @@ function App() {
     const renderSection = () => {
         switch (section) {
             case 'recipes':
-                return <RecipeList />;
+                return <CategoryList />;
             case 'menus':
                 return <h2>Menu of the Week</h2>;  // Placeholder for now
             case 'profile':
                 return <Profile user={user} setUser={setUser} />;
             default:
-                return <RecipeList />;
+                return <CategoryList />;
         }
     };
 
