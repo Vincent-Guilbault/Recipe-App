@@ -6,6 +6,7 @@ use App\Models\WeeklyMenu;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class WeeklyMenuController extends Controller
 {
@@ -34,6 +35,9 @@ class WeeklyMenuController extends Controller
             return response()->json(['message' => 'No recipes available to generate a menu.'], 400);
         }
 
+        // Permanently delete any soft-deleted weekly menus for the user
+        $existingMenu = WeeklyMenu::where('user_id', $userId)->withTrashed()->forceDelete();
+
         // Create a new weekly menu
         $weeklyMenu = WeeklyMenu::create([
             'user_id' => $userId,
@@ -47,25 +51,21 @@ class WeeklyMenuController extends Controller
         $usedRecipes = collect();
 
         foreach ($daysOfWeek as $dayName) {
-            // Filter available recipes that have not been used and are not from the previous category
             $availableRecipes = $recipes->filter(function ($recipe) use ($previousCategory, $usedRecipes) {
                 return $recipe->category_id !== $previousCategory && !$usedRecipes->contains($recipe->id);
             });
 
-            // If no recipes are available, reset the used recipes collection but keep the previous category check
             if ($availableRecipes->isEmpty()) {
                 $availableRecipes = $recipes->filter(function ($recipe) use ($previousCategory) {
                     return $recipe->category_id !== $previousCategory;
                 });
 
-                // If still empty (e.g., very few recipes/categories), allow repeats across days
                 if ($availableRecipes->isEmpty()) {
                     $availableRecipes = $recipes;
-                    $usedRecipes = collect();  // Reset used recipes if we're forced to reuse recipes
+                    $usedRecipes = collect();
                 }
             }
 
-            // Randomly select a recipe and update tracking variables
             $recipe = $availableRecipes->random();
             $previousCategory = $recipe->category_id;
             $usedRecipes->push($recipe->id);
