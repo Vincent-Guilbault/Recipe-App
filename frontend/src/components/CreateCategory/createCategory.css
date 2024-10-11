@@ -1,0 +1,30 @@
+.create-category {
+    margin-bottom: 20px;
+}
+
+.create-category form {
+    background-color:#6A9C89;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.create-category button {
+    background: #16423C;
+    color: white;
+    font-weight: 700;
+    font-family: Poppins, sans-serif;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.create-category form button.create-category-btn {
+    margin-bottom: 20px;
+    background-color: white;
+    color: #16423C;
+}
+
+/* .create-category form input {
+    font-family: Poppins, sans-serif;
+} */

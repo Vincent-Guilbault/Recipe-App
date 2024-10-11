@@ -1,0 +1,16 @@
+.recipes-container{
+    padding: 20px;
+    background: #E9EFEC;
+    min-height: calc(100vh - 60px); /* Adjust the height, assuming the navbar is 60px */
+    box-sizing: border-box; /* Ensure padding is considered within the height */
+    overflow-y: auto; /* Add vertical scroll if content overflows */
+}
+
+.recipes-container h1{
+    margin-bottom: 20px;
+}
+
+.recipes-container input {
+    font-family: Poppins, sans-serif;
+}
+

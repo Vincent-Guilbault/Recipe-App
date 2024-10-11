@@ -50,7 +50,9 @@ function CategoryList() {
 
     return (
         <div className="category-list">
-            <CreateCategory onCategoryCreated={handleCategoryCreated} />
+            <div className="create-category-container">
+                <CreateCategory onCategoryCreated={handleCategoryCreated} />
+            </div>
 
             {categories.length === 0 ? (
                 <p>No categories yet. Create your first category to get started!</p>
@@ -79,10 +81,23 @@ function CategoryList() {
                                 <ul>
                                     {category.recipes && category.recipes.length > 0 ? (
                                         category.recipes.map(recipe => (
-                                            <li key={recipe.id}>{recipe.title}</li>
+                                            <li key={recipe.id} className="recipe-item">
+                                                <div className="recipe-info">
+                                                    <span>{recipe.title}</span>
+                                                    {recipe.preparation_time != null && recipe.preparation_time !== '' && (
+                                                        <span className="preparation-time">
+                                                            {recipe.preparation_time} Minutes
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            </li>
                                         ))
                                     ) : (
-                                        <p>No recipes in this category yet.</p>
+                                        <li key={category.id} className="recipe-item">
+                                            <div className="recipe-info">
+                                                <p>No recipes in this category yet.</p>
+                                            </div>
+                                        </li>
                                     )}
                                 </ul>
                                 <CreateRecipe categoryId={category.id} onRecipeCreated={(newRecipe) => handleRecipeCreated(category.id, newRecipe)} />

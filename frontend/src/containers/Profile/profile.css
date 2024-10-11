@@ -1,6 +1,13 @@
 .profile-container {
     padding: 20px;
     background: #E9EFEC;
+    min-height: calc(100vh - 60px); /* Adjust the height, assuming the navbar is 60px */
+    box-sizing: border-box; /* Ensure padding is considered within the height */
+    overflow-y: auto; /* Add vertical scroll if content overflows */
+}
+
+.profile-container input {
+    font-family: Poppins, sans-serif;
 }
 
 .profile-container label {
@@ -19,6 +26,6 @@
 }
 
 .profile-container .logout-btn {
-    margin-top: 50px;
+    margin-top: 30px;
     background: #16423C;
 }

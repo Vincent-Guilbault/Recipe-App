@@ -1,11 +1,11 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import CategoryList from './components/CategoryList/CategoryList';
 import Navbar from './containers/Navbar/Navbar';
 import Profile from './containers/Profile/Profile';
 import AuthContainer from './containers/AuthContainer/AuthContainer';
 import MenuContainer from './containers/MenuContainer/MenuContainer';
 import axios from 'axios';
+import Recipes from './containers/Recipes/Recipes';
 
 function App() {
     const [user, setUser] = useState(null);  // Track authenticated user
@@ -25,13 +25,13 @@ function App() {
     const renderSection = () => {
         switch (section) {
             case 'recipes':
-                return <CategoryList />;
+                return <Recipes />;
             case 'menus':
                 return <MenuContainer user={user} />;
             case 'profile':
                 return <Profile user={user} setUser={setUser} />;
             default:
-                return <CategoryList />;
+                return <Recipes />;
         }
     };
 

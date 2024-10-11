@@ -1,0 +1,18 @@
+.create-recipe button {
+    background: #16423C;
+    color: white;
+    font-weight: 700;
+    font-family: Poppins, sans-serif;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.create-recipe form button.create-recipe-btn {
+    margin-bottom: 20px;
+    background-color: white;
+    color: #16423C;
+    height: 45px;
+    border: #16423C solid 2px;
+}

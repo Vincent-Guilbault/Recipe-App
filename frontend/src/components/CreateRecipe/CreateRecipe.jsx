@@ -7,7 +7,8 @@ function CreateRecipe({ categoryId, onRecipeCreated }) {
     const [recipeData, setRecipeData] = useState({
         title: '',
         description: '',
-        preparation_time: ''
+        preparation_time: '',
+        external_link: ''
     });
 
     const handleCreateRecipe = (e) => {
@@ -37,19 +38,20 @@ function CreateRecipe({ categoryId, onRecipeCreated }) {
                         placeholder="Enter recipe title"
                         required
                     />
-                    <textarea
-                        value={recipeData.description}
-                        onChange={(e) => setRecipeData({ ...recipeData, description: e.target.value })}
-                        placeholder="Enter recipe description"
-                    />
                     <input
                         type="number"
                         value={recipeData.preparation_time}
                         onChange={(e) => setRecipeData({ ...recipeData, preparation_time: e.target.value })}
                         placeholder="Preparation time (in minutes)"
                     />
-                    <button type="submit">Create</button>
-                    <button type="button" onClick={() => setShowForm(false)}>Cancel</button>
+                    <input
+                        type="text"
+                        value={recipeData.external_link}
+                        onChange={(e) => setRecipeData({ ...recipeData, external_link: e.target.value })}
+                        placeholder="Enter recipe's link"
+                    />
+                    <button type="submit" className="create-recipe-btn">Create</button>
+                    <button type="button" className="cancel-btn" onClick={() => setShowForm(false)}>Cancel</button>
                 </form>
             ) : (
                 <button onClick={() => setShowForm(true)} className="create-recipe-btn">+ Add Recipe</button>

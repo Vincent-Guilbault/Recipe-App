@@ -31,11 +31,11 @@ function CreateCategory({ onCategoryCreated }) {
                         placeholder="Enter category name"
                         required
                     />
-                    <button type="submit">Create</button>
-                    <button type="button" onClick={() => setShowForm(false)}>Cancel</button>
+                    <button type="submit" className="create-category-btn">Create</button>
+                    <button type="button" className='cancel-btn' onClick={() => setShowForm(false)}>Cancel</button>
                 </form>
             ) : (
-                <button onClick={() => setShowForm(true)} className="create-category-btn">+ Add Category</button>
+                <button onClick={() => setShowForm(true)} className="create-category-btn">+ New Category</button>
             )}
         </div>
     );
