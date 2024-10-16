@@ -1,13 +1,18 @@
 .recipes-container{
     padding: 20px;
     background: #E9EFEC;
-    min-height: calc(100vh - 60px); /* Adjust the height, assuming the navbar is 60px */
+    max-height: calc(100vh - 60px); /* Adjust the height, assuming the navbar is 60px */
     box-sizing: border-box; /* Ensure padding is considered within the height */
     overflow-y: auto; /* Add vertical scroll if content overflows */
 }
 
 .recipes-container h1{
+    font-size: 28px;
+    color: #16423C;
     margin-bottom: 20px;
+    font-weight: 700;
+    font-family: Poppins, sans-serif;
+    text-align: center;
 }
 
 .recipes-container input {

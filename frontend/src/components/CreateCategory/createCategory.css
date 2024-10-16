@@ -9,7 +9,7 @@
 }
 
 .create-category button {
-    background: #16423C;
+    background: #6A9C89;
     color: white;
     font-weight: 700;
     font-family: Poppins, sans-serif;
@@ -24,7 +24,3 @@
     background-color: white;
     color: #16423C;
 }
-
-/* .create-category form input {
-    font-family: Poppins, sans-serif;
-} */

@@ -10,7 +10,6 @@ function MenuContainer() {
     useEffect(() => {
         axios.get('/api/weekly-menu')
             .then(response => {
-                console.log(response.data);
                 if (response.data && Array.isArray(response.data.days)) {
                     setMenu(response.data.days);
                 } else {
@@ -36,9 +35,9 @@ function MenuContainer() {
             });
     };
 
-
     return (
         <div className="menu-container">
+            <h1>Your Weekly Menu</h1>
             <button className="generate-menu-btn" onClick={handleGenerateMenu}>Generate Weekly Menu</button>
             <div className="menu-days">
                 {menu.map((day, index) => (

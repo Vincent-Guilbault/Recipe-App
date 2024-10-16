@@ -1,0 +1,45 @@
+.menu-container {
+    padding: 20px;
+    background: #E9EFEC;
+    max-height: calc(100vh - 60px); /* Assuming the navbar is 60px */
+    box-sizing: border-box; /* Ensure padding is considered within the height */
+    overflow-y: auto; /* Add vertical scroll if content overflows */
+}
+
+.menu-container h1 {
+    font-size: 28px;
+    color: #16423C;
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-family: Poppins, sans-serif;
+    text-align: center;
+}
+
+.menu-container button {
+    background: #6A9C89;
+    color: white;
+    font-weight: 700;
+    font-family: Poppins, sans-serif;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.menu-container button:hover {
+    background: #16423C;
+}
+
+.menu-container .generate-menu-btn {
+    margin-bottom: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.menu-days {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
