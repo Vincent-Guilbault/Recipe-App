@@ -11,14 +11,35 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.menu-day h3 {
-    color: #6A9C89;
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 10px;
+.menu-day .menu-day-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
+    position: relative; /* Add this for precise positioning */
+}
+
+.menu-day .menu-day-header h3 {
+    color: #6A9C89;
+    font-size: 20px;
+    font-weight: 600;
+    flex-grow: 1;  /* Ensure the h3 takes available space */
+}
+
+.menu-day .reroll-btn {
+    background-color: transparent;  /* Make the button background transparent */
+    color: #6A9C89;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    width: 60px;
+}
+
+.menu-day .reroll-btn:hover {
+    color: #16423C;
 }
 
 .recipe-details {
@@ -45,4 +66,3 @@
     font-weight: 600;
     text-decoration: none;
 }
-

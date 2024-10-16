@@ -29,10 +29,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy']); // Delete a category
 
     // Route to get the user's weekly menu
-    Route::get('/weekly-menu', [WeeklyMenuController::class, 'index']); // Get the weekly menu
+    Route::get('/weekly-menu', [WeeklyMenuController::class, 'index']);
 
     // Route to generate a new weekly menu
-    Route::post('/generate-weekly-menu', [WeeklyMenuController::class, 'generate']); // Generate weekly menu
+    Route::post('/generate-weekly-menu', [WeeklyMenuController::class, 'generate']);
+
+    // Route to reroll a day in the weekly menu
+    Route::post('/reroll-day/{menuDayId}', [WeeklyMenuController::class, 'rerollDay']);
 
     // Get the authenticated user
     Route::get('/user', function (Request $request) {

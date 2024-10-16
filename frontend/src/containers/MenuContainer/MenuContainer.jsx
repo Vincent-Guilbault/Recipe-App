@@ -21,6 +21,10 @@ function MenuContainer() {
             });
     }, []);
 
+    const handleRerollDay = (dayId, newDayData) => {
+        setMenu(menu.map(day => (day.id === dayId ? newDayData : day)));
+    };
+
     const handleGenerateMenu = () => {
         axios.post('/api/generate-weekly-menu')
             .then(response => {
@@ -41,7 +45,7 @@ function MenuContainer() {
             <button className="generate-menu-btn" onClick={handleGenerateMenu}>Generate Weekly Menu</button>
             <div className="menu-days">
                 {menu.map((day, index) => (
-                    <MenuDay key={index} day={day} />
+                    <MenuDay key={index} day={day} onReroll={handleRerollDay}/>
                 ))}
             </div>
         </div>
