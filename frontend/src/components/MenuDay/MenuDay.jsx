@@ -10,7 +10,7 @@ function MenuDay({ day }) {
                 <div className="recipe-details">
                     <h4>{day.recipe.title}</h4>
                     {day.recipe.external_link != null && day.recipe.external_link !== '' && (
-                        <a href={day.recipe.external_link} className="external-link">
+                        <a href={day.recipe.external_link} className="external-link" target="_blank" rel="noopener noreferrer">
                             <p>View Recipe</p>
                         </a>
                     )}
