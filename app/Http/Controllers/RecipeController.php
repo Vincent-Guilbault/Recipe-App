@@ -43,14 +43,41 @@ class RecipeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validate the input data
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'preparation_time' => 'nullable|integer|min:0',
+            'external_link' => 'nullable|url',
+        ]);
+
+        // Find the recipe by ID and ensure it belongs to the authenticated user
+        $recipe = Recipe::where('id', $id)->where('user_id', Auth::id())->first();
+
+        if (!$recipe) {
+            return response()->json(['message' => 'Recipe not found or not authorized'], 404);
+        }
+
+        // Update the recipe with the validated data
+        $recipe->update($validatedData);
+
+        // Return the updated recipe
+        return response()->json($recipe);
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $recipe = Recipe::where('id', $id)->where('user_id', Auth::id())->first();
+
+        if (!$recipe) {
+            return response()->json(['message' => 'Recipe not found'], 404);
+        }
+
+        $recipe->forceDelete();  // Force delete the recipe
+        return response()->json(['message' => 'Recipe deleted successfully']);
     }
 }
