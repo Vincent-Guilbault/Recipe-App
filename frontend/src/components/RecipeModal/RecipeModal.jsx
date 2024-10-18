@@ -54,13 +54,7 @@ function RecipeModal({ recipe, onClose, onSave, onDelete }) {
             <div className="modal-content">
                 <div className="modal-header">
                     {isEditing ? (
-                        <input
-                            type="text"
-                            name="title"
-                            value={editRecipe.title}
-                            onChange={handleInputChange}
-                            className="edit-input"
-                        />
+                        <h2>Edit Recipe</h2>
                     ) : (
                         <h2>{recipe.title}</h2>
                     )}
@@ -71,68 +65,50 @@ function RecipeModal({ recipe, onClose, onSave, onDelete }) {
                 <div className="modal-body">
                     {isEditing ? (
                         <>
+                            <label htmlFor="title">Title</label>
+                            <input
+                                type="text"
+                                name="title"
+                                value={editRecipe.title}
+                                onChange={handleInputChange}
+                                className="edit-input"
+                            />
+
                             <label htmlFor="description">Description</label>
-                            {editRecipe.description === null ? (
-                                <textarea
+                            <textarea
                                 name="description"
-                                value=""
+                                value={editRecipe.description || ""}
                                 onChange={handleInputChange}
                                 className="edit-textarea"
                             />
-                            ) : (
-                                <textarea
-                                    name="description"
-                                    value={editRecipe.description}
-                                    onChange={handleInputChange}
-                                    className="edit-textarea"
-                                />
-                            )}
+
                             <label htmlFor="preparation_time">Preparation Time</label>
-                            {editRecipe.preparation_time === null ? (
-                                <input
-                                    type="number"
-                                    name="preparation_time"
-                                    value=""
-                                    onChange={handleInputChange}
-                                    className="edit-input"
-                                />
-                            ) : (
-                                <input
-                                    type="number"
-                                    name="preparation_time"
-                                    value={editRecipe.preparation_time}
-                                    onChange={handleInputChange}
-                                    className="edit-input"
-                                />
-                            )}
+                            <input
+                                type="number"
+                                name="preparation_time"
+                                value={editRecipe.preparation_time || ""}
+                                onChange={handleInputChange}
+                                className="edit-input"
+                            />
+
                             <label htmlFor="external_link">External Link</label>
-                            {editRecipe.external_link === null ? (
-                                <input
-                                    type="url"
-                                    name="external_link"
-                                    value=""
-                                    onChange={handleInputChange}
-                                    className="edit-input"
-                                />
-                            ) : (
-                                <input
-                                    type="url"
-                                    name="external_link"
-                                    value={editRecipe.external_link}
-                                    onChange={handleInputChange}
-                                    className="edit-input"
-                                />
-                            )}
+                            <input
+                                type="url"
+                                name="external_link"
+                                value={editRecipe.external_link || ""}
+                                onChange={handleInputChange}
+                                className="edit-input"
+                            />
                         </>
                     ) : (
                         <>
+                            <p className="description">{recipe.description}</p>
                             {recipe.preparation_time && (
                                 <p><strong>Preparation Time:</strong> {recipe.preparation_time} minutes</p>
                             )}
-                            <p>{recipe.description}</p>
                             {recipe.external_link && (
                                 <a href={recipe.external_link} target="_blank" rel="noopener noreferrer">
-                                    Recipe's Link
+                                    View Recipe
                                 </a>
                             )}
                         </>

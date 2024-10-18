@@ -38,6 +38,12 @@ function CreateRecipe({ categoryId, onRecipeCreated }) {
                         placeholder="Enter recipe title"
                         required
                     />
+                    <textarea
+                        value={recipeData.description}
+                        onChange={(e) => setRecipeData({ ...recipeData, description: e.target.value })}
+                        placeholder="Enter recipe description"
+                        required
+                    />
                     <input
                         type="number"
                         value={recipeData.preparation_time}

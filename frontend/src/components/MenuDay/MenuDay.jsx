@@ -29,7 +29,7 @@ function MenuDay({ day, onReroll }) {
                     <h4>{day.recipe.title}</h4>
                     {day.recipe.external_link != null && day.recipe.external_link !== '' && (
                         <a href={day.recipe.external_link} className="external-link" target="_blank" rel="noopener noreferrer">
-                            <p>Recipe's Link</p>
+                            <p>View Recipe</p>
                         </a>
                     )}
                     {day.recipe.preparation_time != null && day.recipe.preparation_time !== '' && (
