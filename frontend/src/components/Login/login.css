@@ -85,21 +85,44 @@ input:focus {
 
 @media (min-width: 768px) {
     form {
-        padding: 30px;
-        max-width: 500px;
+        padding: 40px; /* Increase padding on larger screens */
+        max-width: 450px;
     }
 
     h2 {
-        font-size: 28px;
+        font-size: 30px; /* Increase heading size */
     }
 
     input {
-        padding: 12px;
+        padding: 14px; /* Increase input padding */
+        font-size: 18px; /* Increase font size for larger screens */
+    }
+
+    .login-btn {
+        padding: 16px 32px; /* Larger buttons */
         font-size: 18px;
     }
 
-    button {
-        padding: 14px;
-        font-size: 18px;
+    .register-link {
+        margin-top: 40px;
+        padding-right: 0;
     }
 }
+
+/* Desktop (min-width: 1024px) */
+@media (min-width: 1024px) {
+    form {
+        padding: 50px; /* Add more padding for desktop */
+        max-width: 500px; /* Slightly wider on desktop */
+    }
+
+    .login-btn {
+        padding: 20px 36px; /* Larger button padding */
+        font-size: 20px;
+    }
+
+    .register-link {
+        margin-top: 50px;
+    }
+}
+

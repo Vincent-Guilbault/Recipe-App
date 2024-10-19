@@ -28,16 +28,20 @@ a {
     text-decoration: none;
 }
 
-.gradient__bg {
-    background: linear-gradient(90deg, #AF0606 0%, #23003C 100%);
-}
+/* Desktops */
+@media screen and (min-width: 1024px) {
+    body {
+        font-size: 18px; /* Adjust base font size for readability */
+        background: linear-gradient(0deg, #638889 0%, #9DBC98 100%);
+    }
 
-.gradient__text {
-    background: var(--gradient-text);
-    background-clip: text;
-    /* Webkits to make sure that it works with all browsers. */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    .section__padding {
+        padding: 6rem;
+    }
+
+    .section__margin {
+        margin: 6rem;
+    }
 }
 
 /* Tablets */
