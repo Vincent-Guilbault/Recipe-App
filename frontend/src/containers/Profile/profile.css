@@ -1,6 +1,6 @@
 .profile-container {
     padding: 20px;
-    background: #E9EFEC;
+    background: var(--color-bg);
     max-height: calc(100vh - 60px); /* Adjust the height, assuming the navbar is 60px */
     box-sizing: border-box; /* Ensure padding is considered within the height */
     overflow-y: auto; /* Add vertical scroll if content overflows */
@@ -8,7 +8,7 @@
 
 .profile-container h1 {
     font-size: 28px;
-    color: #16423C;
+    color: var(--color-dark-cyan);
     margin-bottom: 20px;
     font-weight: 700;
     font-family: Poppins, sans-serif;
@@ -24,7 +24,7 @@
 }
 
 .profile-container button {
-    background: #6A9C89;
+    background: var(--color-light-green);
     color: white;
     font-weight: 700;
     font-family: Poppins, sans-serif;
@@ -36,5 +36,5 @@
 
 .profile-container .logout-btn {
     margin-top: 30px;
-    background: #16423C;
+    background: var(--color-dark-cyan);
 }

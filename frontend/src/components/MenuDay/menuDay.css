@@ -16,19 +16,19 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    position: relative; /* Add this for precise positioning */
+    position: relative;
 }
 
 .menu-day .menu-day-header h3 {
-    color: #6A9C89;
+    color: var(--color-light-green);
     font-size: 20px;
     font-weight: 600;
-    flex-grow: 1;  /* Ensure the h3 takes available space */
+    flex-grow: 1;
 }
 
 .menu-day .reroll-btn {
-    background-color: transparent;  /* Make the button background transparent */
-    color: #6A9C89;
+    background-color: transparent;
+    color: var(--color-light-green);
     border: none;
     cursor: pointer;
     display: flex;
@@ -39,7 +39,7 @@
 }
 
 .menu-day .reroll-btn:hover {
-    color: #16423C;
+    color: var(--color-dark-cyan);
 }
 
 .recipe-details {
@@ -48,7 +48,7 @@
 }
 
 .recipe-details h4 {
-    color: #16423C;
+    color: var(--color-dark-cyan);
     font-size: 18px;
     font-weight: 600;
 }
@@ -61,7 +61,7 @@
 }
 
 .recipe-details a p {
-    color: #6A9C89;
+    color: var(--color-light-green);
     font-size: 14px;
     font-weight: 600;
     text-decoration: none;

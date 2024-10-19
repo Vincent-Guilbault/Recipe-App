@@ -49,7 +49,7 @@
 }
 
 .modal-body a {
-    color: #6A9C89;
+    color: var(--color-light-green);
     font-weight: 600;
     text-decoration: none;
     display: block;
@@ -68,19 +68,19 @@
 }
 
 .edit-btn, .delete-btn {
-    background-color: #6A9C89;
+    background-color: var(--color-light-green);
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 25px;
     cursor: pointer;
+    font-family: Poppins, sans-serif;
 }
 
 .delete-btn {
-    background-color: #FF5A5F;
+    background-color: var(--color-dark-cyan);
 }
 
-/* Add styling for the editable inputs */
 .edit-input {
     width: 100%;
     padding: 10px;
@@ -104,7 +104,7 @@
 }
 
 .save-btn, .cancel-btn {
-    background-color: #6A9C89;
+    background-color: var(--color-light-green);
     color: white;
     padding: 10px 20px;
     border: none;
@@ -112,10 +112,10 @@
     cursor: pointer;
 }
 
-.cancel-btn {
-    background-color: #FF5A5F;
+.modal-footer .cancel-btn {
+    background-color: var(--color-dark-cyan);
 }
 
 .save-btn:hover, .cancel-btn:hover {
-    background-color: #16423C;
+    background-color: var(--color-dark-cyan);
 }

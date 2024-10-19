@@ -41,11 +41,11 @@
 }
 
 .confirm-btn {
-    background-color: #16423C;
+    background-color: var(--color-light-green);
     color: white;
 }
 
 .cancel-btn {
-    background-color: #6A9C89;
+    background-color: var(--color-dark-cyan);
     color: white;
 }
