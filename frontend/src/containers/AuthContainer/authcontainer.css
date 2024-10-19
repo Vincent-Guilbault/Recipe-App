@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    background: linear-gradient(90deg, #570000 0%, #23003C 100%);
+    background: linear-gradient(0deg, #638889 0%, #9DBC98 100%);
     overflow: hidden; /* Prevent scrolling to the hidden form */
 }
 
@@ -63,6 +63,7 @@ button {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-family: Poppins, sans-serif;
 }
 
 .auth-sign-in-btn {
@@ -75,13 +76,13 @@ button {
 .auth-sign-in-btn:hover {
     background-color: #ffffff;
     font-weight: 700;
-    color: #23003C;
+    color: var(--color-dark-cyan);
 }
 
 .auth-sign-up-btn {
     background-color: #ffffff;
     font-weight: 700;
-    color: #23003C;
+    color: var(--color-light-green);
 }
 
 .auth-sign-up-btn:hover {

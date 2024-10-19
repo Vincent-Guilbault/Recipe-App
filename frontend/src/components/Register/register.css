@@ -13,7 +13,7 @@ h2 {
     font-weight: 600;
     margin-bottom: 20px;
     text-align: center;
-    color: linear-gradient(90deg, #570000 0%, #23003C 100%);
+    color: white;
 }
 
 label {
@@ -41,7 +41,7 @@ input:focus {
 
 .register-btn {
     width: 100%;
-    background: linear-gradient(90deg, #570000 0%, #23003C 100%);
+    background: var(--color-light-green);
     margin-top: 20px;
     padding: 12px 24px;
     border: none;
@@ -66,20 +66,20 @@ input:focus {
 }
 
 .login-link a {
-    color: linear-gradient(90deg, #570000 0%, #23003C 100%);
+    color: var(--color-light-green);
     font-weight: 600;
     text-decoration: none;
 }
 
 .swap-link {
-    color: #570000;
+    color: var(--color-light-green);
     font-weight: 600;
     cursor: pointer;
     text-decoration: underline;
 }
 
 .swap-link:hover {
-    color: #23003C;
+    color: var(--color-dark-cyan);
 }
 
 

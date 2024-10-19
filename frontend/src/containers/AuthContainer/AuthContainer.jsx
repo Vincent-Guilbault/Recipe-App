@@ -22,10 +22,10 @@ function AuthContainer({ setUser }) {
 
             {/* Header for Login/Register with transition */}
             <div className={`auth-form-header ${showForm ? 'show' : ''}`}>
-                <h2>{showLogin ? 'Hello \n Sign In' : 'Create Your Account'}</h2>
+                <h2>{showLogin ? 'Hello \n Sign In' : 'Create Your \n Account'}</h2>
             </div>
 
-            <h1 className="app-title">RecipePlanner</h1>
+            <h1 className="app-title">Recipe Planner</h1>
             <p className="welcome-message">Welcome Back</p>
             <div className="auth-buttons">
                 <button className="auth-sign-in-btn" onClick={handleSignIn}>Sign In</button>
