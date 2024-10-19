@@ -15,13 +15,24 @@
     background: white;
     padding: 20px;
     border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 
+.confirmation-modal-content h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.confirmation-modal-actions {
+    margin-top: 10px;
+}
+
 .confirmation-modal-actions button {
     padding: 10px 20px;
-    margin: 0 10px;
+    margin-top: 10px;
     border: none;
     border-radius: 25px;
     cursor: pointer;
