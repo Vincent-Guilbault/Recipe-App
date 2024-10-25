@@ -54,7 +54,23 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //Validate the input data
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        // Find the category by ID and ensure it belongs to the authenticated user
+        $category = Category::where('id', $id)->where('user_id', Auth::id())->first();
+
+        if (!$category) {
+            return response()->json(['message' => 'Category not found or not authorized'], 404);
+        }
+
+        // Update the category with the validated data
+        $category->update($validatedData);
+
+        // Return the updated category
+        return response()->json($category);
     }
 
     /**
@@ -62,6 +78,13 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = Category::where('id', $id)->where('user_id', Auth::id())->first();
+
+        if (!$category) {
+            return response()->json(['message' => 'Category not found'], 404);
+        }
+
+        $category->forceDelete();  // Force delete the category
+        return response()->json(['message' => 'Category deleted successfully']);
     }
 }

@@ -44,6 +44,7 @@
 
 .category-recipes ul {
     color: white;
+    border-bottom: var(--color-white) solid 2px;
 }
 
 .category-recipes ul li {
@@ -71,6 +72,18 @@
 .preparation-time {
     text-align: right;
     width: 50%;
+}
+
+.category-recipes-footer {
+    margin-top: 10px;
+}
+
+.category-settings {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 @media (min-width: 768px) {

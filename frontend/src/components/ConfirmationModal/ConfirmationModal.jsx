@@ -10,8 +10,8 @@ function ConfirmationModal({ show, onConfirm, onCancel, message }) {
                 <h4>Are you sure?</h4>
                 <p>{message}</p>
                 <div className="confirmation-modal-actions">
-                    <button className="confirm-btn" onClick={onConfirm}>Yes</button>
-                    <button className="cancel-btn" onClick={onCancel}>Cancel</button>
+                    <button className="primary-btn" onClick={onConfirm}>Yes</button>
+                    <button className="secondary-btn" onClick={onCancel}>Cancel</button>
                 </div>
             </div>
         </div>

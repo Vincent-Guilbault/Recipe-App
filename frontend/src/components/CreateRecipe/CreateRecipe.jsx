@@ -53,7 +53,6 @@ function CreateRecipe({ categoryId, onRecipeCreated }) {
                                     value={recipeData.description}
                                     onChange={(e) => setRecipeData({ ...recipeData, description: e.target.value })}
                                     placeholder="Enter recipe description"
-                                    required
                                 />
                                 <label htmlFor="preparation_time">Preparation time</label>
                                 <input
