@@ -5,40 +5,44 @@ import './login.css';
 function Login({ setUser, setShowLogin }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [errors, setErrors] = useState({ email: '', password: '' });
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setErrors({}); // Clear any previous errors
 
-        axios.post('/api/login', {
-            email: email,
-            password: password,
-        }, { withCredentials: true })
-        .then(() => {
-            // After login, manually fetch the user data to update the state
-            axios.get('/api/user', { withCredentials: true })
-              .then(response => {
-                setUser(response.data);  // Set the authenticated user
-                console.log('Login successful!', response.data);
-              })
-              .catch(() => {
-                setUser(null);  // Handle errors if the user fetch fails
-              });
-        })
-        .catch(error => {
-            setError('Invalid credentials');
-            console.error('Login error:', error);
-        });
+        axios.post('/api/login', { email, password }, { withCredentials: true })
+            .then(() => {
+                // Fetch user data after login success
+                axios.get('/api/user', { withCredentials: true })
+                    .then(response => {
+                        setUser(response.data);
+                    })
+                    .catch(() => {
+                        setUser(null);
+                    });
+            })
+            .catch(error => {
+                // Check if error response has field-specific messages
+                if (error.response && error.response.status === 422) {
+                    const responseErrors = error.response.data.errors || {};
+                    setErrors({
+                        email: responseErrors.email ? responseErrors.email[0] : '',
+                        password: responseErrors.password ? responseErrors.password[0] : 'Invalid password'
+                    });
+                } else {
+                    setErrors({ password: 'Invalid credentials' });
+                }
+            });
     };
-
 
     return (
         <>
             <form onSubmit={handleSubmit}>
-                {/* <h2>Sign In</h2> */}
-                {error && <p>{error}</p>}
-                <div>
+                {errors.password && !errors.email && <p className="error-message">{errors.password}</p>}
+                <div className={`input-group ${errors.email ? 'input-error' : ''}`}>
                     <label>Email</label>
+                    {errors.email && <p className="error-text">{errors.email}</p>}
                     <input
                         type="email"
                         value={email}
@@ -46,8 +50,9 @@ function Login({ setUser, setShowLogin }) {
                         required
                     />
                 </div>
-                <div>
+                <div className={`input-group ${errors.password ? 'input-error' : ''}`}>
                     <label>Password</label>
+                    {errors.password && <p className="error-text">{errors.password}</p>}
                     <input
                         type="password"
                         value={password}
@@ -59,7 +64,6 @@ function Login({ setUser, setShowLogin }) {
             </form>
             <div className="register-link">
                 <p>Don't have an account?</p>
-                {/* setShowLogin to switch to Register */}
                 <span onClick={() => setShowLogin(false)} className="swap-link">Sign Up</span>
             </div>
         </>

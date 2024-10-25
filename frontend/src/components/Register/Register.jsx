@@ -10,7 +10,7 @@ function Register({ setUser, setShowLogin }) {
         password_confirmation: ''
     });
 
-    const [error, setError] = useState('');
+    const [errors, setErrors] = useState({});
 
     // Handle form input change
     const handleInputChange = (e) => {
@@ -24,6 +24,7 @@ function Register({ setUser, setShowLogin }) {
     // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
+        setErrors({}); // Clear previous errors
 
         axios.post('/api/register', formData)
             .then(() => {
@@ -32,29 +33,28 @@ function Register({ setUser, setShowLogin }) {
                     email: formData.email,
                     password: formData.password,
                 }, { withCredentials: true })
-                .then(response => {
-                    setUser(response.data);  // Set user state after login
-                    console.log('Registration and login successful!', response.data);
-                    window.location.reload(); // Refresh the page
-                })
-                .catch(loginError => {
-                    setError('Login failed after registration');
-                    console.error('Login error:', loginError);
-                });
+                    .then(response => {
+                        setUser(response.data);
+                        window.location.reload();
+                    })
+                    .catch(() => setErrors({ general: 'Login failed after registration' }));
             })
             .catch(error => {
-                setError('There was an error with the registration.');
-                console.error('Registration error:', error);
+                if (error.response && error.response.status === 422) {
+                    setErrors(error.response.data.errors || {});
+                } else {
+                    setErrors({ general: 'There was an error with the registration.' });
+                }
             });
     };
 
     return (
         <div>
-            {/* <h2>Register</h2> */}
-            {error && <p>{error}</p>}
+            {errors.general && <p className="error-message">{errors.general}</p>}
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className={`input-group ${errors.name ? 'input-error' : ''}`}>
                     <label>Name:</label>
+                    {errors.name && <p className="error-text">{errors.name[0]}</p>}
                     <input
                         type="text"
                         name="name"
@@ -63,8 +63,9 @@ function Register({ setUser, setShowLogin }) {
                         required
                     />
                 </div>
-                <div>
+                <div className={`input-group ${errors.email ? 'input-error' : ''}`}>
                     <label>Email:</label>
+                    {errors.email && <p className="error-text">{errors.email[0]}</p>}
                     <input
                         type="email"
                         name="email"
@@ -73,8 +74,9 @@ function Register({ setUser, setShowLogin }) {
                         required
                     />
                 </div>
-                <div>
+                <div className={`input-group ${errors.password ? 'input-error' : ''}`}>
                     <label>Password:</label>
+                    {errors.password && <p className="error-text">{errors.password[0]}</p>}
                     <input
                         type="password"
                         name="password"
@@ -83,8 +85,9 @@ function Register({ setUser, setShowLogin }) {
                         required
                     />
                 </div>
-                <div>
+                <div className={`input-group ${errors.password_confirmation ? 'input-error' : ''}`}>
                     <label>Confirm Password:</label>
+                    {errors.password_confirmation && <p className="error-text">{errors.password_confirmation[0]}</p>}
                     <input
                         type="password"
                         name="password_confirmation"
@@ -97,7 +100,6 @@ function Register({ setUser, setShowLogin }) {
             </form>
             <div className="login-link">
                 <p>Already have an account?</p>
-                {/* setShowLogin to switch back to Login */}
                 <span onClick={() => setShowLogin(true)} className="swap-link">Sign In</span>
             </div>
         </div>
