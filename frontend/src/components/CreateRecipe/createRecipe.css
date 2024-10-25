@@ -1,27 +1,9 @@
-.create-recipe button {
-    background: var(--color-bg);
-    color: var(--color-dark-cyan);
-    font-weight: 700;
-    font-family: Poppins, sans-serif;
-    padding: 10px 20px;
-    border: var(--color-dark-cyan) solid 2px;
-    border-radius: 25px;
-    cursor: pointer;
+.create-recipe .modal-header {
+    padding: 0 20px;
 }
 
-.create-recipe form button.create-recipe-btn {
-    margin-bottom: 20px;
-    background-color: white;
-    color: var(--color-dark-cyan);
-    height: 45px;
-    border: var(--color-dark-cyan) solid 2px;
-}
-
-.create-recipe form button.cancel-btn {
-    background-color: var(--color-dark-cyan);
-    color: white;
-    height: 45px;
-    border: var(--color-dark-cyan) solid 2px;
+.create-recipe form {
+    padding: 20px 20px 0 20px;
 }
 
 .create-recipe textarea {

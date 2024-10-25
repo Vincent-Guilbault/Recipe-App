@@ -1,6 +1,7 @@
 .profile-container {
     padding: 20px;
     background: var(--color-bg);
+    height: 100vh;
     max-height: calc(100vh - 60px); /* Adjust the height, assuming the navbar is 60px */
     box-sizing: border-box; /* Ensure padding is considered within the height */
     overflow-y: auto; /* Add vertical scroll if content overflows */
@@ -23,18 +24,33 @@
     margin-top: 20px;
 }
 
-.profile-container button {
-    background: var(--color-light-green);
-    color: white;
-    font-weight: 700;
-    font-family: Poppins, sans-serif;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
+.profile-container .secondary-btn.logout-btn {
+    margin-top: 30px;
 }
 
-.profile-container .logout-btn {
-    margin-top: 30px;
-    background: var(--color-dark-cyan);
+@media (min-width: 768px) {
+    .profile-container {
+        max-height: 100vh;
+        margin-left: 80px; /* Add a 80px left margin for larger screens because of the navbar */
+        width: calc(100% - 80px); /* Subtract 80px to account for the navbar width */
+    }
+
+    .profile-content {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1024px) {
+    .profile-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 450px) and (max-width: 767px) {
+    .profile-content {
+        width: 90%;
+        margin: 0 5%;
+    }
 }

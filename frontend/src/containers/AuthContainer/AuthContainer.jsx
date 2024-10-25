@@ -28,8 +28,8 @@ function AuthContainer({ setUser }) {
             <h1 className="app-title">Recipe Planner</h1>
             <p className="welcome-message">Welcome Back</p>
             <div className="auth-buttons">
-                <button className="auth-sign-in-btn" onClick={handleSignIn}>Sign In</button>
-                <button className="auth-sign-up-btn" onClick={handleSignUp}>Sign Up</button>
+                <button className="contrast-btn" onClick={handleSignIn}>Sign In</button>
+                <button className="secondary-btn" onClick={handleSignUp}>Sign Up</button>
             </div>
 
             <div className={`auth-form-container ${showForm ? 'show' : ''}`}>

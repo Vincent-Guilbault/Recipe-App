@@ -21,3 +21,27 @@
 .navbar span:hover {
     color: #ddd;
 }
+
+/* Media query for screen sizes larger than 768px */
+@media screen and (min-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Change to a vertical layout */
+        justify-content: flex-start;
+        align-items: flex-start;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 80px; /* Adjust the width for the vertical layout */
+        height: 100%; /* Full height for vertical navigation */
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar span {
+        margin: 20px 0; /* Add spacing between the icons */
+        font-size: 24px; /* Adjust icon size if needed */
+    }
+
+    .navbar span:hover {
+        color: #ddd;
+    }
+}

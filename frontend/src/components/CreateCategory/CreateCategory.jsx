@@ -23,19 +23,28 @@ function CreateCategory({ onCategoryCreated }) {
     return (
         <div className="create-category">
             {showForm ? (
-                <form onSubmit={handleCreateCategory}>
-                    <input
-                        type="text"
-                        value={categoryName}
-                        onChange={(e) => setCategoryName(e.target.value)}
-                        placeholder="Enter category name"
-                        required
-                    />
-                    <button type="submit" className="create-category-btn">Create</button>
-                    <button type="button" className='cancel-btn' onClick={() => setShowForm(false)}>Cancel</button>
-                </form>
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h2 className="modal-title">Create Category</h2>
+                        </div>
+                        <div className="modal-body">
+                            <form onSubmit={handleCreateCategory}>
+                                <input
+                                    type="text"
+                                    value={categoryName}
+                                    onChange={(e) => setCategoryName(e.target.value)}
+                                    placeholder="Enter category name"
+                                    required
+                                />
+                                <button type="submit" className="primary-btn">Create</button>
+                                <button type="button" className="secondary-btn" onClick={() => setShowForm(false)}>Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             ) : (
-                <button onClick={() => setShowForm(true)} className="create-category-btn">+ New Category</button>
+                <button onClick={() => setShowForm(true)} className="primary-btn">+ New Category</button>
             )}
         </div>
     );

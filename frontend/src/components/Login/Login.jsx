@@ -55,7 +55,7 @@ function Login({ setUser, setShowLogin }) {
                         required
                     />
                 </div>
-                <button className="login-btn" type="submit">Sign In</button>
+                <button className="primary-btn login-btn" type="submit">Sign In</button>
             </form>
             <div className="register-link">
                 <p>Don't have an account?</p>

@@ -102,10 +102,10 @@ function RecipeModal({ recipe, onClose, onSave, onDelete }) {
                         </>
                     ) : (
                         <>
-                            <p className="description">{recipe.description}</p>
                             {recipe.preparation_time && (
                                 <p><strong>Preparation Time:</strong> {recipe.preparation_time} minutes</p>
                             )}
+                            <p className="description">{recipe.description}</p>
                             {recipe.external_link && (
                                 <a href={recipe.external_link} target="_blank" rel="noopener noreferrer">
                                     View Recipe
@@ -117,13 +117,13 @@ function RecipeModal({ recipe, onClose, onSave, onDelete }) {
                 <div className="modal-footer">
                     {isEditing ? (
                         <>
-                            <button className="save-btn" onClick={handleSave}>Save</button>
-                            <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
+                            <button className="primary-btn" onClick={handleSave}>Save</button>
+                            <button className="secondary-btn" onClick={handleCancel}>Cancel</button>
                         </>
                     ) : (
                         <>
-                            <button className="edit-btn" onClick={() => setIsEditing(true)}>Edit</button>
-                            <button className="delete-btn" onClick={handleDelete}>Delete</button>
+                            <button className="primary-btn" onClick={() => setIsEditing(true)}>Edit</button>
+                            <button className="secondary-btn" onClick={handleDelete}>Delete</button>
                         </>
                     )}
                 </div>

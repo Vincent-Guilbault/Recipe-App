@@ -41,12 +41,14 @@ function MenuContainer() {
 
     return (
         <div className="menu-container">
-            <h1>Your Weekly Menu</h1>
-            <button className="generate-menu-btn" onClick={handleGenerateMenu}>Generate Weekly Menu</button>
-            <div className="menu-days">
-                {menu.map((day, index) => (
-                    <MenuDay key={index} day={day} onReroll={handleRerollDay}/>
-                ))}
+            <div className="menu-content">
+                <h1>Your Weekly Menu</h1>
+                <button className="primary-btn generate-menu-btn" onClick={handleGenerateMenu}>Generate Weekly Menu</button>
+                <div className="menu-days">
+                    {menu.map((day, index) => (
+                        <MenuDay key={index} day={day} onReroll={handleRerollDay}/>
+                    ))}
+                </div>
             </div>
         </div>
     );

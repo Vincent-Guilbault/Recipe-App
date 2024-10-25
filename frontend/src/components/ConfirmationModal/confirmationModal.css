@@ -29,23 +29,3 @@
 .confirmation-modal-actions {
     margin-top: 10px;
 }
-
-.confirmation-modal-actions button {
-    padding: 10px 20px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-family: Poppins, sans-serif;
-    font-weight: 700;
-}
-
-.confirm-btn {
-    background-color: var(--color-light-green);
-    color: white;
-}
-
-.cancel-btn {
-    background-color: var(--color-dark-cyan);
-    color: white;
-}

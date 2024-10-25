@@ -2,25 +2,18 @@
     margin-bottom: 20px;
 }
 
-.create-category form {
-    background-color:var(--color-light-green);
-    padding: 20px;
-    border-radius: 5px;
+.create-category .modal-header .modal-title {
+    text-align: center;
 }
 
-.create-category button {
-    background: var(--color-light-green);
-    color: white;
-    font-weight: 700;
-    font-family: Poppins, sans-serif;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
+.create-category .modal-body form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 20px 0 20px;
+    margin: 0 auto;
 }
 
-.create-category form button.create-category-btn {
-    margin-bottom: 20px;
-    background-color: white;
-    color: var(--color-dark-cyan);
+.create-category form button.primary-btn {
+    margin-bottom: 10px;
 }

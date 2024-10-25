@@ -93,7 +93,7 @@ function Register({ setUser, setShowLogin }) {
                         required
                     />
                 </div>
-                <button className="register-btn" type="submit">Register</button>
+                <button className="primary-btn register-btn" type="submit">Register</button>
             </form>
             <div className="login-link">
                 <p>Already have an account?</p>

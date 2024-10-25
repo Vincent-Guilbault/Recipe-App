@@ -8,14 +8,6 @@ form {
     box-sizing: border-box;
 }
 
-h2 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    text-align: center;
-    color: white;
-}
-
 label {
     font-size: 14px;
     color: #333;
@@ -37,20 +29,6 @@ input {
 input:focus {
     border-color: #333;
     outline: none;
-}
-
-.login-btn {
-    width: 100%;
-    background: var(--color-light-green);
-    margin-top: 20px;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    color: #fff;
-    font-family: Poppins, sans-serif;
 }
 
 .register-link {
@@ -117,6 +95,7 @@ input:focus {
     }
 
     .login-btn {
+        margin-top: 20px;
         padding: 20px 36px; /* Larger button padding */
         font-size: 20px;
     }
