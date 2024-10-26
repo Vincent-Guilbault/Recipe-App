@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 /* Color Variables */
 :root {
     --color-white: #FFFFFF;
@@ -165,17 +167,20 @@ a {
     margin-top: 20px;
 }
 
-/* Error Message Styling - App.css */
+/* Error Message Styling */
 .error-message {
     color: red;
     font-size: 14px;
-    margin-bottom: 10px;
-    text-align: center;
+    margin-bottom: 5px;
 }
 
 .input-group {
     position: relative;
     margin-bottom: 20px;
+}
+
+.error-input {
+    border-color: red;
 }
 
 .input-error input {
@@ -188,6 +193,53 @@ a {
     margin-top: -10px;
     margin-bottom: 5px;
 }
+
+/* Success Message Styling */
+.success-message {
+    position: fixed;
+    bottom: 80px; /* Adjust as desired */
+    left: 50%;
+    transform: translateX(-50%); /* Center the message horizontally */
+    color: green;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: Poppins, sans-serif;
+    background-color: var(--color-white);
+    padding: 10px 20px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    opacity: 0;
+    width: 60%;
+
+    /* Animation */
+    animation: slideUpFadeIn 0.5s ease forwards, slideDownFadeOut 0.5s ease 5s forwards;
+}
+
+/* Keyframes for slide up and fade in */
+@keyframes slideUpFadeIn {
+    0% {
+        transform: translate(-50%, 20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+/* Keyframes for slide down and fade out */
+@keyframes slideDownFadeOut {
+    0% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, 20px);
+        opacity: 0;
+    }
+}
+
 
 /* Desktops */
 @media screen and (min-width: 1024px) {
@@ -202,6 +254,37 @@ a {
 
     .section__margin {
         margin: 6rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .success-message {
+        width: 300px;
+        transform: translateX(-40%); /* Center the message horizontally */
+    }
+
+    /* Keyframes for slide up and fade in */
+    @keyframes slideUpFadeIn {
+        0% {
+            transform: translate(-40%, 20px);
+            opacity: 0;
+        }
+        100% {
+            transform: translate(-40%, 0);
+            opacity: 1;
+        }
+    }
+
+    /* Keyframes for slide down and fade out */
+    @keyframes slideDownFadeOut {
+        0% {
+            transform: translate(-40%, 0);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(-40%, 20px);
+            opacity: 0;
+        }
     }
 }
 

@@ -1,125 +1,115 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import './profile.css'
+import './profile.css';
 
-function Profile({ user, setUser }) {  // Use props from App.js
-    const handleLogout = () => {
-        axios.post('/api/logout', {}, { withCredentials: true })
-            .then(() => {
-                // Clear the user state after successful logout
-                setUser(null);
+function Profile({ user, setUser }) {
+    const [formData, setFormData] = useState({
+        name: user.name,
+        email: user.email,
+        password: '',
+        password_confirmation: ''
+    });
+    const [errors, setErrors] = useState({});
+    const [successMessage, setSuccessMessage] = useState(''); // Track success message
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSave = (field) => {
+        axios.put('/api/user', formData, { withCredentials: true })
+            .then(response => {
+                setUser(response.data);
+                setErrors({});
+                setSuccessMessage(`${field.charAt(0).toUpperCase() + field.slice(1)} updated successfully!`);
+                if (field === 'password') {
+                    setUser(null);
+                    window.location.reload();
+                }
+
+                // Clear the success message after 5 seconds
+                setTimeout(() => setSuccessMessage(''), 6000);
             })
             .catch(error => {
-                console.error('Logout failed', error);
+                if (error.response && error.response.data.errors) {
+                    setErrors(error.response.data.errors);
+                } else {
+                    console.error('Update failed', error);
+                }
             });
+    };
+
+    const handleLogout = () => {
+        axios.post('/api/logout', {}, { withCredentials: true })
+            .then(() => setUser(null))
+            .catch(error => console.error('Logout failed', error));
     };
 
     return (
         <div className="profile-container">
             <div className="profile-content">
                 <h1>Your Profile</h1>
-                {/* If the user is authenticated, show their name and a logout button */}
+                {successMessage && <p className="success-message">{successMessage}</p>}
                 {user ? (
                     <div>
-                        {/* Show the user's name with a label and a input to be able to edit it */}
-                        <div>
+                        <div className="profile-field">
                             <label htmlFor="name">Name:</label>
+                            {errors.name && <p className="error-message">{errors.name[0]}</p>}
                             <input
                                 type="text"
                                 id="name"
                                 name="name"
-                                value={user.name}
-                                onChange={(e) => setUser({ ...user, name: e.target.value })}
+                                value={formData.name}
+                                onChange={handleInputChange}
+                                className={errors.name ? 'error-input' : ''}
                             />
-                            {/* Button to save the user's changes */}
-                            <button
-                                className='primary-btn'
-                                onClick={() => {
-                                    axios.put('/api/user', user, { withCredentials: true })
-                                        .then(response => {
-                                            setUser(response.data);
-                                        })
-                                        .catch(error => {
-                                            console.error('Update failed', error);
-                                        });
-                                }}
-                            >
-                                Save
-                            </button>
+                            <button className="primary-btn" onClick={() => handleSave('name')}>Save</button>
                         </div>
-                        {/* Show the user's email with a label and a input to be able to edit it */}
-                        <div>
+
+                        <div className="profile-field">
                             <label htmlFor="email">Email:</label>
+                            {errors.email && <p className="error-message">{errors.email[0]}</p>}
                             <input
-                                type="text"
+                                type="email"
                                 id="email"
                                 name="email"
-                                value={user.email}
-                                onChange={(e) => setUser({ ...user, email: e.target.value })}
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                className={errors.email ? 'error-input' : ''}
                             />
-                            {/* Button to save the user's changes */}
-                            <button
-                                className='primary-btn'
-                                onClick={() => {
-                                    axios.put('/api/user', user, { withCredentials: true })
-                                        .then(response => {
-                                            setUser(response.data);
-                                        })
-                                        .catch(error => {
-                                            console.error('Update failed', error);
-                                        });
-                                }}
-                            >
-                                Save
-                            </button>
+                            <button className="primary-btn" onClick={() => handleSave('email')}>Save</button>
                         </div>
-                        {/* Input to be able to edit the user's password */}
-                        <div>
+
+                        <div className="profile-field">
                             <label htmlFor="password">New Password:</label>
+                            {errors.password && <p className="error-message">{errors.password[0]}</p>}
                             <input
                                 type="password"
                                 id="password"
                                 name="password"
-                                value={user.password || ''}  // Default to empty string if password is undefined
-                                onChange={(e) => setUser({ ...user, password: e.target.value })}
+                                value={formData.password}
+                                onChange={handleInputChange}
+                                className={errors.password ? 'error-input' : ''}
                             />
-                            {/* Input to confirm the user's new password */}
+
                             <label htmlFor="password_confirmation">Confirm New Password:</label>
+                            {errors.password_confirmation && <p className="error-message">{errors.password_confirmation[0]}</p>}
                             <input
                                 type="password"
                                 id="password_confirmation"
                                 name="password_confirmation"
-                                value={user.password_confirmation || ''}  // Default to empty string if password_confirmation is undefined
-                                onChange={(e) => setUser({ ...user, password_confirmation: e.target.value })}
+                                value={formData.password_confirmation}
+                                onChange={handleInputChange}
+                                className={errors.password_confirmation ? 'error-input' : ''}
                             />
-                            {/* Button to save the user's changes */}
-                            <button
-                                className='primary-btn'
-                                onClick={() => {
-                                    axios.put('/api/user', user, { withCredentials: true })
-                                        .then(response => {
-                                            if (user.password) {
-                                                // If password was changed, log the user out
-                                                setUser(null);  // Clear the user state to trigger re-render
-                                                // Force a page reload to reset any stale sessions or cookies
-                                                window.location.reload();
-                                            } else {
-                                                // If no password change, just update the user data
-                                                setUser(response.data);
-                                            }
-                                        })
-                                        .catch(error => {
-                                            console.error('Update failed', error);
-                                        });
-                                }}
-                            >
-                                Save
-                            </button>
+
+                            <button className="primary-btn" onClick={() => handleSave('password')}>Save</button>
                         </div>
+
                         <button className="secondary-btn logout-btn" onClick={handleLogout}>Logout</button>
                     </div>
                 ) : (
-                    // Show the login button if the user is not authenticated
                     <button className="primary-btn" onClick={() => window.location.href = '/login'}>Login</button>
                 )}
             </div>
