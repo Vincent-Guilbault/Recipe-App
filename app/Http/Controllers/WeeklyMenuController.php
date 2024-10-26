@@ -99,19 +99,25 @@ class WeeklyMenuController extends Controller
             return response()->json(['message' => 'No recipes available to reroll.'], 400);
         }
 
+        // Get all recipe IDs currently used in the weekly menu (excluding the current day's recipe)
+        $currentMenuRecipeIds = MenuRecipe::where('weekly_menu_id', $menuDay->weekly_menu_id)
+            ->where('id', '!=', $menuDayId)
+            ->pluck('recipe_id')
+            ->toArray();
+
         // Get the previous category of the day's current recipe
         $previousCategory = $menuDay->recipe ? $menuDay->recipe->category_id : null;
 
-        // Filter available recipes that aren't from the same category
-        $availableRecipes = $recipes->filter(function ($recipe) use ($previousCategory) {
-            return $recipe->category_id !== $previousCategory;
+        // Filter available recipes that aren't from the same category and aren't already in the weekly menu
+        $availableRecipes = $recipes->filter(function ($recipe) use ($previousCategory, $currentMenuRecipeIds) {
+            return $recipe->category_id !== $previousCategory && !in_array($recipe->id, $currentMenuRecipeIds);
         });
 
         if ($availableRecipes->isEmpty()) {
             return response()->json(['message' => 'No alternate recipes available'], 400);
         }
 
-        // Randomly select a new recipe
+        // Randomly select a new recipe from the filtered list
         $newRecipe = $availableRecipes->random();
         $menuDay->update([
             'recipe_id' => $newRecipe->id,
