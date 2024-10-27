@@ -128,7 +128,9 @@ function CategoryList() {
             </div>
 
             {categories.length === 0 ? (
-                <p>No categories yet. Create your first category to get started!</p>
+                <div className="advice-message">
+                    <p>No categories yet. Create your first category to get started!</p>
+                </div>
             ) : (
                 categories.map(category => (
                     <div key={category.id} className="category-item">

@@ -44,6 +44,15 @@ function MenuContainer() {
             <div className="menu-content">
                 <h1>Your Weekly Menu</h1>
                 <button className="primary-btn generate-menu-btn" onClick={handleGenerateMenu}>Generate Weekly Menu</button>
+
+                {menu.length === 0 && (
+                    // Display a message if menu is empty
+                    <div className="advice-message">
+                        <p>Welcome to your weekly menu! Before generating a menu, please make sure to add some recipes for better results!</p>
+                    </div>
+                )}
+
+
                 <div className="menu-days">
                     {menu.map((day, index) => (
                         <MenuDay key={index} day={day} onReroll={handleRerollDay}/>

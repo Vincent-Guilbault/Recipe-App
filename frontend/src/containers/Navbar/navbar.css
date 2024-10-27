@@ -52,7 +52,7 @@
 
     .navbar-logo {
         display: block; /* Ensure it's displayed on larger screens */
-        width: 40px; /* Adjust size as needed */
+        width: 35px;
         margin: 10px 0 30px 0;
     }
 }

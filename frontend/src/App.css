@@ -240,6 +240,36 @@ a {
     }
 }
 
+/* Advice Message For New Users */
+.advice-message {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background-color: #f4f4f4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: var(--color-dark-cyan);
+    font-weight: 600;
+    transform: translateX(-100%); /* Start off-screen to the left */
+    opacity: 0; /* Start transparent */
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Add transition for smooth animation */
+
+    /* Animation */
+    animation: slideRight 0.5s ease forwards;
+}
+
+@keyframes slideRight {
+    0% {
+        transform: translateX(-100%); /* Start off-screen to the left */
+        opacity: 0; /* Start transparent */
+    }
+    100% {
+        transform: translateX(0); /* Move to original position */
+        opacity: 1; /* Fade in */
+    }
+}
+
+
+/* Media Queries */
 
 /* Desktops */
 @media screen and (min-width: 1024px) {
