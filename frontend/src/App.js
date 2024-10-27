@@ -6,6 +6,7 @@ import AuthContainer from './containers/AuthContainer/AuthContainer';
 import MenuContainer from './containers/MenuContainer/MenuContainer';
 import axios from 'axios';
 import Recipes from './containers/Recipes/Recipes';
+import logo from './assets/Meal-Planner-Logo_White.svg';
 
 function App() {
     const [user, setUser] = useState(null);  // Track authenticated user
@@ -20,6 +21,26 @@ function App() {
             .catch(() => {
                 setUser(null);  // If not authenticated, set user to null
             });
+    }, []);
+
+    useEffect(() => {
+        // Favicon
+        const faviconLink = document.createElement('link');
+        faviconLink.rel = 'icon';
+        faviconLink.href = logo;
+        document.head.appendChild(faviconLink);
+
+        // Apple Touch Icon
+        const appleTouchIconLink = document.createElement('link');
+        appleTouchIconLink.rel = 'apple-touch-icon';
+        appleTouchIconLink.href = logo; // Using the same logo, though it can be a different one
+        document.head.appendChild(appleTouchIconLink);
+
+        // Clean up links when the component unmounts
+        return () => {
+            document.head.removeChild(faviconLink);
+            document.head.removeChild(appleTouchIconLink);
+        };
     }, []);
 
     const renderSection = () => {

@@ -22,26 +22,38 @@
     color: #ddd;
 }
 
-/* Media query for screen sizes larger than 768px */
+/* Hide logo on smaller screens */
+.navbar-logo {
+    display: none;
+}
+
+/* Logo styling for larger screens */
 @media screen and (min-width: 768px) {
     .navbar {
-        flex-direction: column; /* Change to a vertical layout */
+        flex-direction: column;
         justify-content: flex-start;
-        align-items: flex-start;
+        align-items: center;
         position: fixed;
         top: 0;
         left: 0;
-        width: 80px; /* Adjust the width for the vertical layout */
-        height: 100%; /* Full height for vertical navigation */
+        width: 80px;
+        height: 100%;
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
     }
 
     .navbar span {
-        margin: 20px 0; /* Add spacing between the icons */
-        font-size: 24px; /* Adjust icon size if needed */
+        margin: 20px 0;
+        font-size: 24px;
     }
 
     .navbar span:hover {
         color: #ddd;
     }
+
+    .navbar-logo {
+        display: block; /* Ensure it's displayed on larger screens */
+        width: 40px; /* Adjust size as needed */
+        margin: 10px 0 30px 0;
+    }
 }
+

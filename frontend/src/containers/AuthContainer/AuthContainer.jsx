@@ -25,8 +25,8 @@ function AuthContainer({ setUser }) {
                 <h2>{showLogin ? 'Hello \n Sign In' : 'Create \n Your Account'}</h2>
             </div>
 
-            <h1 className="app-title">Recipe Planner</h1>
-            <p className="welcome-message">Welcome Back</p>
+            <h1 className="app-title">Meal Planner</h1>
+            <p className="welcome-message">Eat Smart, Live Well</p>
             <div className="auth-buttons">
                 <button className="contrast-btn" onClick={handleSignIn}>Sign In</button>
                 <button className="secondary-btn" onClick={handleSignUp}>Sign Up</button>
