@@ -6,15 +6,17 @@ import CreateCategory from '../CreateCategory/CreateCategory';
 import RecipeModal from '../RecipeModal/RecipeModal';
 import CategoryModal from '../CategoryModal/CategoryModal';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
+import Pagination from '../Pagination/Pagination';
 
 function CategoryList() {
     const [categories, setCategories] = useState([]);
-    const [expandedCategories, setExpandedCategories] = useState({});
+    const [expandedCategoryId, setExpandedCategoryId] = useState(null); // Track only one expanded category
     const [selectedRecipe, setSelectedRecipe] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [categoryToDelete, setCategoryToDelete] = useState(null);
     const [loading, setLoading] = useState(true); // Loading state for categories
+    const recipesPerPage = 5; // Number of recipes per page
 
     useEffect(() => {
         axios.get('/api/categories')
@@ -38,10 +40,8 @@ function CategoryList() {
     };
 
     const handleToggleCategory = (categoryId) => {
-        setExpandedCategories(prev => ({
-            ...prev,
-            [categoryId]: !prev[categoryId],
-        }));
+        // If the clicked category is already expanded, close it; otherwise, open it and close others.
+        setExpandedCategoryId(prevId => (prevId === categoryId ? null : categoryId));
     };
 
     const handleSaveCategory = (updatedCategory) => {
@@ -57,6 +57,19 @@ function CategoryList() {
     const handleDeleteCategory = (category) => {
         setCategoryToDelete(category);
         setShowConfirmation(true);
+    };
+
+    const handlePageChange = (categoryId, page) => {
+        setCategories(prevCategories =>
+            prevCategories.map(category =>
+                category.id === categoryId ? { ...category, currentPage: page } : category
+            )
+        );
+    };
+
+    const getPaginatedRecipes = (recipes, currentPage) => {
+        const startIndex = (currentPage - 1) * recipesPerPage;
+        return recipes.slice(startIndex, startIndex + recipesPerPage);
     };
 
     // Confirm delete and remove the category
@@ -137,51 +150,65 @@ function CategoryList() {
                     <p>No categories yet. Create your first category to get started!</p>
                 </div>
             ) : (
-                categories.map(category => (
-                    <div key={category.id} className="category-item">
-                        <div className="category-header" onClick={() => handleToggleCategory(category.id)}>
-                            <h3>{category.name}</h3>
-                            <span className="arrow">
-                                {expandedCategories[category.id] ?
-                                    <span className="material-symbols-outlined">keyboard_arrow_down</span>
-                                    :
-                                    <span className="material-symbols-outlined">keyboard_arrow_up</span>
-                                }
-                            </span>
-                        </div>
-                        {expandedCategories[category.id] && (
-                            <div className="category-recipes">
-                                <ul>
-                                    {category.recipes && category.recipes.length > 0 ? (
-                                        category.recipes.map(recipe => (
-                                            <li key={recipe.id} className="recipe-item" onClick={() => setSelectedRecipe(recipe)}>
-                                                <div className="recipe-info">
-                                                    <span>{recipe.title}</span>
-                                                    {recipe.preparation_time && (
-                                                        <span className="preparation-time">
-                                                            {recipe.preparation_time} Minutes
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            </li>
-                                        ))
+                categories.map(category => {
+                    // Set up pagination for each category independently
+                    const currentPage = category.currentPage || 1;
+                    const paginatedRecipes = getPaginatedRecipes(category.recipes || [], currentPage);
+                    const totalPages = Math.ceil((category.recipes || []).length / recipesPerPage);
+
+                    return (
+                        <div key={category.id} className="category-item">
+                            <div className="category-header" onClick={() => handleToggleCategory(category.id)}>
+                                <h3>{category.name}</h3>
+                                <span className="arrow">
+                                    {expandedCategoryId === category.id ? (
+                                        <span className="material-symbols-outlined">keyboard_arrow_down</span>
                                     ) : (
-                                        <li key={category.id} className="recipe-item">
-                                            <p>No recipes in this category yet.</p>
-                                        </li>
+                                        <span className="material-symbols-outlined">keyboard_arrow_up</span>
                                     )}
-                                </ul>
-                                <div className="category-recipes-footer">
-                                    <CreateRecipe categoryId={category.id} onRecipeCreated={(newRecipe) => handleRecipeCreated(category.id, newRecipe)} />
-                                    <div className="category-settings">
-                                        <button className='outline-btn' onClick={() => setSelectedCategory(category)}>Edit</button>
-                                        <button className='outline-btn' onClick={() => handleDeleteCategory(category)}>Delete</button>
+                                </span>
+                            </div>
+                            {expandedCategoryId === category.id && (
+                                <div className="category-recipes">
+                                    <ul>
+                                        {paginatedRecipes.length > 0 ? (
+                                            paginatedRecipes.map(recipe => (
+                                                <li key={recipe.id} className="recipe-item" onClick={() => setSelectedRecipe(recipe)}>
+                                                    <div className="recipe-info">
+                                                        <span>{recipe.title}</span>
+                                                        {recipe.preparation_time && (
+                                                            <span className="preparation-time">
+                                                                {recipe.preparation_time} Minutes
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                </li>
+                                            ))
+                                        ) : (
+                                            <li className="recipe-item">
+                                                <p>No recipes in this category yet.</p>
+                                            </li>
+                                        )}
+                                    </ul>
+                                    {totalPages > 1 && (
+                                        <Pagination
+                                            currentPage={currentPage}
+                                            totalPages={totalPages}
+                                            onPageChange={(page) => handlePageChange(category.id, page)}
+                                        />
+                                    )}
+                                    <div className="category-recipes-footer">
+                                        <CreateRecipe categoryId={category.id} onRecipeCreated={(newRecipe) => handleRecipeCreated(category.id, newRecipe)} />
+                                        <div className="category-settings">
+                                            <button className='outline-btn' onClick={() => setSelectedCategory(category)}>Edit</button>
+                                            <button className='outline-btn' onClick={() => handleDeleteCategory(category)}>Delete</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )}
-                    </div>
-                ))
+                            )}
+                        </div>
+                    );
+                })
             )}
 
             {/* Render Recipe Modal */}
