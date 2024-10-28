@@ -22,10 +22,21 @@ class RecipeController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
-        $data = $request->all();
-        $data['user_id'] = Auth::id();  // Use the authenticated user's ID
+        // Validate the input data
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:50',
+            'description' => 'nullable|string|max:255',
+            'preparation_time' => 'nullable|integer|min:0|max:999',
+            'external_link' => 'nullable|url',
+            'category_id' => 'required|exists:categories,id',
+        ]);
 
-        $recipe = Recipe::create($data);
+        // Automatically add the authenticated user's ID to the data
+        $validatedData['user_id'] = Auth::id();
+
+        // Create the recipe with the validated data
+        $recipe = Recipe::create($validatedData);
+
         return response()->json($recipe, 201);
     }
 
@@ -45,9 +56,9 @@ class RecipeController extends Controller
     {
         // Validate the input data
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'preparation_time' => 'nullable|integer|min:0',
+            'title' => 'required|string|max:50',
+            'description' => 'nullable|string|max:255',
+            'preparation_time' => 'nullable|integer|min:0|max:999',
             'external_link' => 'nullable|url',
         ]);
 

@@ -6,6 +6,7 @@ import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 function RecipeModal({ recipe, onClose, onSave, onDelete }) {
     const [isEditing, setIsEditing] = useState(false);  // Track editing mode
     const [showConfirmation, setShowConfirmation] = useState(false);
+    const [errors, setErrors] = useState({ title: '', description: '', preparation_time: '', external_link: '' });
     const [editRecipe, setEditRecipe] = useState({
         title: recipe.title,
         description: recipe.description,
@@ -20,6 +21,8 @@ function RecipeModal({ recipe, onClose, onSave, onDelete }) {
     };
 
     const handleSave = () => {
+        setErrors({}); // Clear any previous errors
+
         // Send the updated recipe data to the backend
         axios.put(`/api/recipes/${recipe.id}`, editRecipe)
             .then(response => {
@@ -27,12 +30,23 @@ function RecipeModal({ recipe, onClose, onSave, onDelete }) {
                 setIsEditing(false);  // Exit editing mode
             })
             .catch(error => {
-                console.error('Error updating the recipe', error);
+                if (error.response && error.response.status === 422) {
+                    const responseErrors = error.response.data.errors || {};
+                    setErrors({
+                        title: responseErrors.title ? responseErrors.title[0] : '',
+                        description: responseErrors.description ? responseErrors.description[0] : '',
+                        preparation_time: responseErrors.preparation_time ? responseErrors.preparation_time[0] : '',
+                        external_link: responseErrors.external_link ? responseErrors.external_link[0] : ''
+                    });
+                } else {
+                    setErrors({ title: 'Failed to edit recipe' });
+                }
             });
     };
 
     const handleCancel = () => {
         setIsEditing(false);  // Exit editing mode without saving
+        setErrors({}); // Clear any previous errors
     };
 
     const handleDelete = () => {
@@ -65,40 +79,52 @@ function RecipeModal({ recipe, onClose, onSave, onDelete }) {
                 <div className="modal-body">
                     {isEditing ? (
                         <>
-                            <label htmlFor="title">Title</label>
-                            <input
-                                type="text"
-                                name="title"
-                                value={editRecipe.title}
-                                onChange={handleInputChange}
-                                className="edit-input"
-                            />
+                            <div className={`input-group ${errors.title ? 'input-error' : ''}`}>
+                                <label htmlFor="title">Title</label>
+                                {errors.title && <p className="error-message">{errors.title}</p>}
+                                <input
+                                    type="text"
+                                    name="title"
+                                    value={editRecipe.title}
+                                    onChange={handleInputChange}
+                                    className="edit-input"
+                                />
+                            </div>
 
-                            <label htmlFor="description">Description</label>
-                            <textarea
-                                name="description"
-                                value={editRecipe.description || ""}
-                                onChange={handleInputChange}
-                                className="edit-textarea"
-                            />
+                            <div className={`input-group ${errors.description ? 'input-error' : ''}`}>
+                                <label htmlFor="description">Description</label>
+                                {errors.description && <p className="error-message">{errors.description}</p>}
+                                <textarea
+                                    name="description"
+                                    value={editRecipe.description || ""}
+                                    onChange={handleInputChange}
+                                    className="edit-textarea"
+                                />
+                            </div>
 
-                            <label htmlFor="preparation_time">Preparation Time</label>
-                            <input
-                                type="number"
-                                name="preparation_time"
-                                value={editRecipe.preparation_time || ""}
-                                onChange={handleInputChange}
-                                className="edit-input"
-                            />
+                            <div className={`input-group ${errors.preparation_time ? 'input-error' : ''}`}>
+                                <label htmlFor="preparation_time">Preparation Time</label>
+                                {errors.preparation_time && <p className="error-message">{errors.preparation_time}</p>}
+                                <input
+                                    type="number"
+                                    name="preparation_time"
+                                    value={editRecipe.preparation_time || ""}
+                                    onChange={handleInputChange}
+                                    className="edit-input"
+                                />
+                            </div>
 
-                            <label htmlFor="external_link">External Link</label>
-                            <input
-                                type="url"
-                                name="external_link"
-                                value={editRecipe.external_link || ""}
-                                onChange={handleInputChange}
-                                className="edit-input"
-                            />
+                            <div className={`input-group ${errors.external_link ? 'input-error' : ''}`}>
+                                <label htmlFor="external_link">External Link</label>
+                                {errors.external_link && <p className="error-message">{errors.external_link}</p>}
+                                <input
+                                    type="url"
+                                    name="external_link"
+                                    value={editRecipe.external_link || ""}
+                                    onChange={handleInputChange}
+                                    className="edit-input"
+                                />
+                            </div>
                         </>
                     ) : (
                         <>
