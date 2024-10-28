@@ -14,6 +14,7 @@ function CategoryList() {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [categoryToDelete, setCategoryToDelete] = useState(null);
+    const [loading, setLoading] = useState(true); // Loading state for categories
 
     useEffect(() => {
         axios.get('/api/categories')
@@ -26,6 +27,9 @@ function CategoryList() {
             })
             .catch(error => {
                 console.error('Error fetching categories', error);
+            })
+            .finally(() => {
+                setLoading(false); // Set loading to false after fetching
             });
     }, []);
 
@@ -127,7 +131,8 @@ function CategoryList() {
                 <CreateCategory onCategoryCreated={handleCategoryCreated} />
             </div>
 
-            {categories.length === 0 ? (
+            {/* Display advice message if there are no categories after fetching data */}
+            {!loading &&categories.length === 0 ? (
                 <div className="advice-message">
                     <p>No categories yet. Create your first category to get started!</p>
                 </div>

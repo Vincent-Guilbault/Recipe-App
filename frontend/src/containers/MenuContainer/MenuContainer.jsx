@@ -5,6 +5,7 @@ import MenuDay from '../../components/MenuDay/MenuDay';
 
 function MenuContainer() {
     const [menu, setMenu] = useState([]);
+    const [loading, setLoading] = useState(true); // Loading state for the menu
 
     // Fetch the existing menu when the component mounts
     useEffect(() => {
@@ -18,6 +19,9 @@ function MenuContainer() {
             })
             .catch(error => {
                 console.error('Error fetching menu', error);
+            })
+            .finally(() => {
+                setLoading(false); // Set loading to false after fetching
             });
     }, []);
 
@@ -45,7 +49,7 @@ function MenuContainer() {
                 <h1>Your Weekly Menu</h1>
                 <button className="primary-btn generate-menu-btn" onClick={handleGenerateMenu}>Generate Weekly Menu</button>
 
-                {menu.length === 0 && (
+                {!loading && menu.length === 0 && (
                     // Display a message if menu is empty
                     <div className="advice-message">
                         <p>Welcome to your weekly menu! Before generating a menu, please make sure to add some recipes for better results!</p>
