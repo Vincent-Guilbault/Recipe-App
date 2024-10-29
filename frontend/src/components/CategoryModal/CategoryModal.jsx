@@ -4,8 +4,10 @@ import './categoryModal.css';
 
 function CategoryModal({ category, onClose, onSave }) {
     const [newCategoryName, setNewCategoryName] = useState(category.name);
+    const [errors, setErrors] = useState({ name: '' });
 
     const handleSave = () => {
+        setErrors({}); // Clear any previous errors
         // Update category with the new name
         axios.put(`/api/categories/${category.id}`, { name: newCategoryName })
             .then(response => {
@@ -13,7 +15,14 @@ function CategoryModal({ category, onClose, onSave }) {
                 onClose(); // Close the modal after saving
             })
             .catch(error => {
-                console.error('Error updating category', error);
+                if (error.response && error.response.status === 422) {
+                    const responseErrors = error.response.data.errors || {};
+                    setErrors({
+                        name: responseErrors.name ? responseErrors.name[0] : '',
+                    });
+                } else {
+                    setErrors({ name: 'Failed to edit category' });
+                }
             });
     };
 
@@ -27,13 +36,16 @@ function CategoryModal({ category, onClose, onSave }) {
                     </button>
                 </div>
                 <div className="modal-body">
-                    <label>Category Name</label>
-                    <input
-                        type="text"
-                        value={newCategoryName}
-                        onChange={(e) => setNewCategoryName(e.target.value)}
-                        className="edit-input"
-                    />
+                    <div className={`input-group ${errors.name ? 'input-error' : ''}`}>
+                        <label>Category Name</label>
+                        {errors.name && <p className="error-message">{errors.name}</p>}
+                        <input
+                            type="text"
+                            value={newCategoryName}
+                            onChange={(e) => setNewCategoryName(e.target.value)}
+                            className="edit-input"
+                        />
+                    </div>
                 </div>
                 <div className="modal-footer">
                     <button className="primary-btn" onClick={handleSave}>Save</button>

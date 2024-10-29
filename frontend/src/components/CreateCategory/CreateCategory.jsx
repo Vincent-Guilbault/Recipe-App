@@ -5,9 +5,11 @@ import './createCategory.css';
 function CreateCategory({ onCategoryCreated }) {
     const [showForm, setShowForm] = useState(false);
     const [categoryName, setCategoryName] = useState('');
+    const [errors, setErrors] = useState({ name: '' });
 
     const handleCreateCategory = (e) => {
         e.preventDefault();
+        setErrors({}); // Clear any previous errors
 
         axios.post('/api/categories', { name: categoryName })
             .then(response => {
@@ -16,7 +18,14 @@ function CreateCategory({ onCategoryCreated }) {
                 onCategoryCreated(response.data); // Notify parent of the new category
             })
             .catch(error => {
-                console.error('There was an error creating the category!', error);
+                if (error.response && error.response.status === 422) {
+                    const responseErrors = error.response.data.errors || {};
+                    setErrors({
+                        name: responseErrors.name ? responseErrors.name[0] : '',
+                    });
+                } else {
+                    setErrors({ name: 'Failed to create category' });
+                }
             });
     };
 
@@ -30,15 +39,21 @@ function CreateCategory({ onCategoryCreated }) {
                         </div>
                         <div className="modal-body">
                             <form onSubmit={handleCreateCategory}>
-                                <input
-                                    type="text"
-                                    value={categoryName}
-                                    onChange={(e) => setCategoryName(e.target.value)}
-                                    placeholder="Enter category name"
-                                    required
-                                />
-                                <button type="submit" className="primary-btn">Create</button>
-                                <button type="button" className="secondary-btn" onClick={() => setShowForm(false)}>Cancel</button>
+                                <div className={`input-group ${errors.name ? 'input-error' : ''}`}>
+                                    <label>Category Name</label>
+                                    {errors.name && <p className="error-message">{errors.name}</p>}
+                                    <input
+                                        type="text"
+                                        value={categoryName}
+                                        onChange={(e) => setCategoryName(e.target.value)}
+                                        placeholder="Enter category name"
+                                        required
+                                    />
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="submit" className="primary-btn">Create</button>
+                                    <button type="button" className="secondary-btn" onClick={() => setShowForm(false)}>Cancel</button>
+                                </div>
                             </form>
                         </div>
                     </div>

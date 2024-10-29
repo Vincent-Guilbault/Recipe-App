@@ -25,7 +25,7 @@ class CategoryController extends Controller
     public function store(Request $request) {
 
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:50',
         ]);
 
         $user = Auth::user();
@@ -56,7 +56,7 @@ class CategoryController extends Controller
     {
         //Validate the input data
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:50',
         ]);
 
         // Find the category by ID and ensure it belongs to the authenticated user

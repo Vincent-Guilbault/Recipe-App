@@ -10,10 +10,10 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 20px 20px 0 20px;
+    padding: 0 20px;
     margin: 0 auto;
 }
 
-.create-category form button.primary-btn {
-    margin-bottom: 10px;
+.create-category .modal-body form .modal-footer {
+    margin: 0;
 }
