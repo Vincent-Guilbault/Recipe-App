@@ -1,6 +1,7 @@
 .menu-container {
     padding: 20px;
     background: var(--color-bg);
+    height: 100vh;
     max-height: calc(100vh - 60px); /* Assuming the navbar is 60px */
     box-sizing: border-box; /* Ensure padding is considered within the height */
     overflow-y: auto; /* Add vertical scroll if content overflows */
